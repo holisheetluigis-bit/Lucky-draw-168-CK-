@@ -1,42 +1,52 @@
-/* Wheel Stadium, Flapper Needle & LED Ring Styling */
+/* =======================================================
+   Wheel Stadium, Flapper Needle & LED Ring Styling
+   Colors: Royal Blue, Neon Orange, Emerald Green, Pure White
+   ======================================================= */
 
 .wheel-stadium {
   position: relative;
   width: 100%;
-  max-width: 470px;
+  max-width: 480px;
   aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-/* Outer Pulsing Aura */
+/* Outer Pulsing Multi-Color Aura */
 .wheel-aura-glow {
   position: absolute;
-  inset: -15px;
+  inset: -18px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 102, 255, 0.25) 0%, rgba(255, 101, 0, 0.15) 50%, transparent 70%);
-  filter: blur(20px);
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.28) 0%, rgba(255, 101, 0, 0.18) 45%, rgba(0, 208, 132, 0.15) 65%, transparent 75%);
+  filter: blur(24px);
   z-index: 1;
-  animation: auraPulse 4s infinite alternate ease-in-out;
+  animation: auraPulse 3.5s infinite alternate ease-in-out;
   pointer-events: none;
 }
 
 @keyframes auraPulse {
   0% {
-    transform: scale(0.95);
-    opacity: 0.7;
-    background: radial-gradient(circle, rgba(0, 102, 255, 0.3) 0%, rgba(255, 101, 0, 0.15) 50%, transparent 70%);
+    transform: scale(0.96);
+    opacity: 0.75;
+    background: radial-gradient(circle, rgba(0, 102, 255, 0.35) 0%, rgba(255, 101, 0, 0.2) 50%, transparent 72%);
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.95;
+    background: radial-gradient(circle, rgba(255, 101, 0, 0.35) 0%, rgba(0, 208, 132, 0.25) 50%, transparent 72%);
   }
   100% {
-    transform: scale(1.05);
+    transform: scale(1.06);
     opacity: 1;
-    background: radial-gradient(circle, rgba(0, 208, 132, 0.3) 0%, rgba(255, 101, 0, 0.25) 50%, transparent 70%);
+    background: radial-gradient(circle, rgba(0, 208, 132, 0.35) 0%, rgba(0, 102, 255, 0.25) 50%, transparent 72%);
   }
 }
 
-/* Canvas Container */
+/* Outer Metallic Bezel Ring Container */
 .wheel-canvas-wrap {
   position: relative;
   z-index: 2;
@@ -46,6 +56,11 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 
+    0 0 0 4px rgba(255, 255, 255, 0.15),
+    0 0 35px rgba(0, 102, 255, 0.4),
+    0 24px 50px rgba(3, 7, 15, 0.9);
 }
 
 #wheel-canvas {
@@ -54,77 +69,109 @@
   height: auto;
   border-radius: 50%;
   touch-action: none;
-  filter: drop-shadow(0 20px 35px rgba(5, 11, 20, 0.8));
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.75));
+  transition: transform 0.2s ease;
 }
 
-/* Top Pointer Indicator / Flapper Needle */
+.wheel-canvas-wrap:hover #wheel-canvas {
+  filter: drop-shadow(0 18px 36px rgba(0, 102, 255, 0.5));
+}
+
+/* Top Pointer Indicator / Mechanical Flapper Needle */
 .wheel-pointer-assembly {
   position: absolute;
-  top: -8px;
+  top: -14px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10;
+  z-index: 20;
   display: flex;
   flex-direction: column;
   align-items: center;
   pointer-events: none;
 }
 
+/* Golden Crown Mount for pointer */
 .flapper-mount {
-  width: 32px;
-  height: 16px;
-  background: linear-gradient(180deg, #ffd166, #ff6500);
-  border-radius: 8px 8px 0 0;
-  box-shadow: 0 -2px 10px rgba(255, 101, 0, 0.6);
+  width: 44px;
+  height: 20px;
+  background: linear-gradient(180deg, #ffd166 0%, #ff6500 100%);
+  border-radius: 12px 12px 4px 4px;
+  box-shadow: 0 4px 14px rgba(255, 101, 0, 0.7), inset 0 1px 2px #ffffff;
   border: 2px solid #ffffff;
   border-bottom: none;
-}
-
-.flapper-needle {
-  width: 0;
-  height: 0;
-  border-left: 18px solid transparent;
-  border-right: 18px solid transparent;
-  border-top: 40px solid #ff3b00;
   position: relative;
-  transform-origin: top center;
-  transition: transform 0.04s cubic-bezier(0.1, 0.9, 0.2, 1);
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+  z-index: 3;
 }
 
-.flapper-needle::after {
-  content: '';
+.flapper-mount::after {
+  content: '▼';
   position: absolute;
-  top: -38px;
-  left: -9px;
-  width: 0;
-  height: 0;
-  border-left: 9px solid transparent;
-  border-right: 9px solid transparent;
-  border-top: 24px solid #ffffff;
+  top: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
+/* Crisp Sharp Flapper Needle */
+.flapper-needle {
+  width: 32px;
+  height: 48px;
+  margin-top: -3px;
+  position: relative;
+  transform-origin: 50% 0;
+  transition: transform 0.05s cubic-bezier(0.1, 0.9, 0.2, 1);
+  clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+  background: linear-gradient(180deg, #ffffff 0%, #ff8e00 25%, #ff3b00 70%, #d82b00 100%);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+  z-index: 2;
+}
+
+/* Glowing Green Jewel on Pointer Needle */
 .flapper-center-jewel {
   position: absolute;
-  top: -32px;
-  left: -7px;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 14px;
   height: 14px;
-  background: radial-gradient(circle, #00d084, #059669);
+  background: radial-gradient(circle at 35% 35%, #6ee7b7, #00d084 60%, #047857 100%);
   border-radius: 50%;
-  box-shadow: 0 0 10px #00d084;
+  box-shadow: 0 0 12px #00d084, inset 0 1px 2px #ffffff;
   border: 1.5px solid #ffffff;
+  z-index: 4;
 }
 
 /* Mobile Responsive Wheel Stadium */
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .wheel-stadium {
-    max-width: 330px;
+    max-width: 350px;
+  }
+
+  .wheel-pointer-assembly {
+    top: -10px;
+  }
+
+  .flapper-mount {
+    width: 36px;
+    height: 17px;
   }
 
   .flapper-needle {
-    border-left: 14px solid transparent;
-    border-right: 14px solid transparent;
-    border-top: 32px solid #ff3b00;
+    width: 26px;
+    height: 40px;
+  }
+
+  .flapper-center-jewel {
+    width: 11px;
+    height: 11px;
+    top: 4px;
+  }
+}
+
+@media (max-width: 380px) {
+  .wheel-stadium {
+    max-width: 295px;
   }
 }

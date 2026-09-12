@@ -189,7 +189,7 @@ class LuckyWheel {
   updateFlapperVisual(degrees) {
     const flapperEl = document.getElementById('wheel-flapper');
     if (flapperEl) {
-      flapperEl.style.transform = `translateX(-50%) rotate(${degrees}deg)`;
+      flapperEl.style.transform = `rotate(${degrees}deg)`;
     }
   }
 

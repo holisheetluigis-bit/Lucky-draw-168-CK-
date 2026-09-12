@@ -366,6 +366,24 @@ class App {
       openWalletBtn.addEventListener('click', () => this.openWalletDrawer());
     }
 
+    // Mobile sticky triggers
+    const mobileSpinBtn = document.getElementById('mobile-spin-trigger-btn');
+    if (mobileSpinBtn) {
+      mobileSpinBtn.addEventListener('click', () => {
+        const heroSpinBtn = document.getElementById('main-spin-btn');
+        if (heroSpinBtn && !heroSpinBtn.disabled) {
+          heroSpinBtn.click();
+          const wheelEl = document.querySelector('.wheel-stadium');
+          if (wheelEl) wheelEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    }
+
+    const mobileWalletBtn = document.getElementById('mobile-wallet-trigger-btn');
+    if (mobileWalletBtn) {
+      mobileWalletBtn.addEventListener('click', () => this.openWalletDrawer());
+    }
+
     // Tab buttons in Auth Modal
     document.getElementById('tab-register-btn')?.addEventListener('click', () => this.switchAuthTab('register'));
     document.getElementById('tab-login-btn')?.addEventListener('click', () => this.switchAuthTab('login'));
