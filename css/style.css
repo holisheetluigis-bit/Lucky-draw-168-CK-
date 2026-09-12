@@ -2,7 +2,6 @@
    Lucky Draw 168 Portfolio Website - Core Design System
    Theme Colors: Royal Blue, Neon Orange, Emerald Green, Pure White
    ======================================================= */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
   /* Blue Palette */
@@ -175,6 +174,7 @@ body {
   letter-spacing: -0.5px;
   background: linear-gradient(90deg, #ffffff 40%, var(--cyan-400) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   line-height: 1.1;
 }
@@ -463,12 +463,14 @@ body {
 .hero-h1 .gradient-orange {
   background: linear-gradient(135deg, var(--orange-500), var(--amber-400));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .hero-h1 .gradient-green {
   background: linear-gradient(135deg, var(--green-400), var(--mint-300));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
