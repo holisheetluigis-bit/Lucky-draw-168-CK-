@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Lucky Draw 168 | Win Cash $1-$1,500, Ford Raptor 2025 & Special Prizes</title>
+  <meta name="description" content="Official Lucky Draw 168 platform. Spin the lucky wheel to win cash prizes from $1 to $1,500, Ford Raptor 2025, or unlock the Mystery Special Prize for a Vespa 2025 or Honda ADV 750cc." />
+  
+  <!-- CSS Stylesheets in separate folder -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/wheel.css" />
+  <link rel="stylesheet" href="css/modal.css" />
+</head>
+<body>
+
+  <!-- Background Celebration Particles Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Sticky Top Navigation -->
+  <header class="main-header">
+    <div class="container nav-row">
+      <!-- Brand Logo -->
+      <a href="#" class="brand-logo-wrap" id="logo-refresh-link">
+        <span class="logo-badge">168</span>
+        <div class="brand-titles">
+          <span class="brand-title">LUCKY DRAW</span>
+          <span class="brand-sub">PORTFOLIO EDITION</span>
+        </div>
+      </a>
+
+      <!-- Header Action Items -->
+      <div class="header-actions">
+        <!-- Sound Mute/Unmute Toggle -->
+        <button class="icon-btn" id="sound-toggle-btn" title="Toggle Sound">🔊</button>
+
+        <!-- Prize Wallet Drawer Button -->
+        <button class="wallet-btn" id="nav-wallet-btn" title="View Claimed Prizes">
+          <span>💼 Wallet</span>
+          <span class="wallet-badge-count" id="wallet-count-badge" style="display: none;">0</span>
+        </button>
+
+        <!-- Dynamic User Auth Status / Register Button -->
+        <div id="user-profile-badge">
+          <!-- Populated dynamically by auth.js: Guest or User Profile -->
+        </div>
+        <button class="auth-primary-btn" id="auth-action-btn">
+          <span>Sign In / Register</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Live Simulated Winners Ticker -->
+  <aside class="ticker-bar" aria-label="Recent Winners">
+    <div class="container ticker-wrapper">
+      <div class="ticker-tag">⚡ LIVE WINS</div>
+      <div class="ticker-track" id="live-winners-track">
+        <!-- Live rolling items populated by app.js -->
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Hero Draw Section -->
+  <main>
+    <section class="hero-arena">
+      <div class="container hero-grid">
+        
+        <!-- Left: Hero Headline & Description -->
+        <div class="hero-content-col">
+          <div class="hero-tag-glow">
+            <span>🎉 DAILY JACKPOT WHEEL</span>
+          </div>
+
+          <h1 class="hero-h1">
+            SPIN THE WHEEL & WIN <span class="gradient-orange">FORD RAPTOR 2025</span> &amp; <span class="gradient-green">CASH $1 - $1,500</span>
+          </h1>
+
+          <p class="hero-desc">
+            Experience high-stakes lucky draw gaming with provably fair physics. Land on the <strong>Special Prize</strong> to unlock and crack open the Mystery Vault revealing either a <strong>Vespa 2025</strong> or <strong>Honda ADV 750cc</strong>!
+          </p>
+
+          <!-- Highlights Row -->
+          <div class="hero-highlights">
+            <div class="highlight-box">
+              <span class="highlight-icon">💵</span>
+              <span class="highlight-val">$1 - $1,500</span>
+              <span class="highlight-label">Instant Cash Drops</span>
+            </div>
+            <div class="highlight-box">
+              <span class="highlight-icon">🚙</span>
+              <span class="highlight-val">Ford Raptor</span>
+              <span class="highlight-label">2025 Super Truck</span>
+            </div>
+            <div class="highlight-box special-box">
+              <span class="highlight-icon">🎁</span>
+              <span class="highlight-val">Special Prize</span>
+              <span class="highlight-label">Vespa or ADV 750cc</span>
+            </div>
+          </div>
+
+          <!-- Spin CTA Controls -->
+          <div class="hero-cta-group">
+            <button class="btn-spin-hero" id="main-spin-btn">
+              <span>🎯 SPIN TO WIN</span>
+            </button>
+            <div class="spins-status-indicator">
+              <span>Remaining Free Spins:</span>
+              <span class="spins-counter-badge" id="spins-left-count">5</span>
+            </div>
+          </div>
+
+          <!-- Quick Portfolio Test / Feature Inspector Bar -->
+          <div class="portfolio-demo-bar">
+            <span class="demo-tag">Portfolio Testing Controls:</span>
+            <button class="demo-btn" id="demo-test-mystery-btn" title="Directly test the mystery unbox experience">
+              🎁 Test Mystery Unbox (Vespa/ADV)
+            </button>
+            <button class="demo-btn" id="demo-test-raptor-btn" title="Force wheel to spin to Ford Raptor">
+              🚙 Test Raptor 2025 Land
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Canvas Wheel Stadium -->
+        <div class="wheel-arena-col">
+          <div class="wheel-stadium">
+            <!-- Pulsing Ambient Glow -->
+            <div class="wheel-aura-glow"></div>
+
+            <!-- Top Flapper Pointer Assembly -->
+            <div class="wheel-pointer-assembly">
+              <div class="flapper-mount"></div>
+              <div class="flapper-needle" id="wheel-flapper">
+                <div class="flapper-center-jewel"></div>
+              </div>
+            </div>
+
+            <!-- HTML5 High-DPI Canvas Wheel -->
+            <div class="wheel-canvas-wrap">
+              <canvas id="wheel-canvas" width="460" height="460"></canvas>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Special Mystery Prize Spotlight Section -->
+    <section class="special-spotlight-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">MYTHIC SPECIAL PRIZE VAULT</span>
+          <h2 class="section-title">WHAT IS INSIDE THE SPECIAL PRIZE?</h2>
+          <p class="section-desc">
+            When the wheel stops on <strong>SPECIAL PRIZE 🎁</strong>, you get exclusive access to unbox the Mystery Vault. One of these two luxury powerhouse machines will be yours!
+          </p>
+        </div>
+
+        <div class="special-vehicles-duo">
+          <!-- Mystery Option 1: Vespa 2025 -->
+          <div class="special-v-card vespa-card">
+            <div class="special-v-img-wrap">
+              <img src="assets/images/vespa_2025.jpg" alt="Vespa 2025 Super Sport" class="special-v-img" loading="lazy" />
+              <div class="v-badge-floating">SPECIAL MYSTERY OPTION A</div>
+            </div>
+            <div class="special-v-body">
+              <div class="v-name-row">
+                <h3 class="v-title">Vespa 2025 Super Sport</h3>
+                <span class="v-msrp">$8,499</span>
+              </div>
+              <p class="v-desc">
+                High-end Italian luxury scooter. Features 300 HPE engine, dual-channel ABS brakes, pearl white finish with sporty orange racing stripes, and genuine leather saddle.
+              </p>
+              <div class="v-specs-pills">
+                <span class="v-spec-pill">⚡ 300cc High Output</span>
+                <span class="v-spec-pill">🛡️ ABS + ASR Traction</span>
+                <span class="v-spec-pill">✨ Official 2025 Edition</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mystery Option 2: Honda ADV 750cc -->
+          <div class="special-v-card adv-card">
+            <div class="special-v-img-wrap">
+              <img src="assets/images/adv_750cc.jpg" alt="Honda ADV 750cc Adventure" class="special-v-img" loading="lazy" />
+              <div class="v-badge-floating">SPECIAL MYSTERY OPTION B</div>
+            </div>
+            <div class="special-v-body">
+              <div class="v-name-row">
+                <h3 class="v-title">Honda ADV 750cc (2025)</h3>
+                <span class="v-msrp">$13,200</span>
+              </div>
+              <p class="v-desc">
+                The ultimate adventure maxi-scooter with a 745cc twin-cylinder engine, Dual Clutch Transmission (DCT), cross-spoke off-road rims, and aggressive sapphire bodywork.
+              </p>
+              <div class="v-specs-pills">
+                <span class="v-spec-pill">⚡ 745cc Liquid-Cooled</span>
+                <span class="v-spec-pill">⚙️ 6-Speed Dual Clutch</span>
+                <span class="v-spec-pill">🏔️ All-Terrain Ready</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Complete Prize Gallery Section -->
+    <section class="prize-gallery-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">PRIZE REWARD POOL</span>
+          <h2 class="section-title">EXPLORE ALL PRIZES &amp; ODDS</h2>
+          <p class="section-desc">
+            All cash winnings ($1, $10, $50, $150, $500, $1,500) are disbursed immediately. Vehicle prizes are fulfilled via showroom delivery with verified paperwork.
+          </p>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="gallery-filters">
+          <button class="filter-tab-btn active" data-filter="all">All Prizes</button>
+          <button class="filter-tab-btn" data-filter="cash">Cash ($1 - $1,500)</button>
+          <button class="filter-tab-btn" data-filter="vehicle">Vehicles &amp; Special</button>
+        </div>
+
+        <!-- Cards Grid rendered by app.js -->
+        <div class="prize-grid" id="prize-gallery-grid">
+          <!-- Populated by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture & Features Portfolio Showcase Section -->
+    <section class="portfolio-features-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">ENGINEERING HIGHLIGHTS</span>
+          <h2 class="section-title">LUCKY DRAW PLATFORM ARCHITECTURE</h2>
+          <p class="section-desc">
+            Built from scratch with modern web standards, native canvas physics, Web Audio API synthesis, and authenticated claim preservation.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feat-card">
+            <div class="feat-icon-bubble blue">🎯</div>
+            <h3 class="feat-title">High-DPI Canvas Wheel</h3>
+            <p class="feat-text">
+              Zero-blur retina rendering with devicePixelRatio scaling, mechanical flapper deflection, and natural quintic deceleration easing.
+            </p>
+          </div>
+
+          <div class="feat-card">
+            <div class="feat-icon-bubble orange">🔒</div>
+            <h3 class="feat-title">Guest-to-Claim Gate</h3>
+            <p class="feat-text">
+              Seamless guest spin onboarding. If an unauthenticated user wins, prizes are securely reserved in pending state until account registration.
+            </p>
+          </div>
+
+          <div class="feat-card">
+            <div class="feat-icon-bubble green">🔊</div>
+            <h3 class="feat-title">Web Audio Synthesizer</h3>
+            <p class="feat-text">
+              100% self-contained audio generator producing mechanical peg ticks, harmonic victory chords, and dramatic mystery box bass drops.
+            </p>
+          </div>
+
+          <div class="feat-card">
+            <div class="feat-icon-bubble white">📱</div>
+            <h3 class="feat-title">100% Mobile Optimized</h3>
+            <p class="feat-text">
+              Designed with touch swipe support, responsive layout clamps, slide-out prize drawers, and zero horizontal overflow.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="brand-logo-wrap">
+            <span class="logo-badge">168</span>
+            <span class="brand-title">LUCKY DRAW</span>
+          </a>
+          <p class="footer-desc">
+            Next-generation promotional lucky draw platform featuring cash prizes up to $1,500, Ford Raptor 2025, Vespa 2025, and Honda ADV 750cc.
+          </p>
+        </div>
+
+        <div class="footer-links-group">
+          <div class="footer-col">
+            <span class="col-heading">Prizes</span>
+            <a href="#" class="footer-link">Cash $1 - $1,500</a>
+            <a href="#" class="footer-link">Ford Raptor 2025</a>
+            <a href="#" class="footer-link">Vespa 2025 Super Sport</a>
+            <a href="#" class="footer-link">Honda ADV 750cc</a>
+          </div>
+
+          <div class="footer-col">
+            <span class="col-heading">Security</span>
+            <a href="#" class="footer-link">Provably Fair Wheel</a>
+            <a href="#" class="footer-link">Claim Verification</a>
+            <a href="#" class="footer-link">Redemption Guidelines</a>
+          </div>
+
+          <div class="footer-col">
+            <span class="col-heading">Account</span>
+            <a href="#" class="footer-link" onclick="window.app.openAuthModal('register'); return false;">Register Account</a>
+            <a href="#" class="footer-link" onclick="window.app.openAuthModal('login'); return false;">Player Login</a>
+            <a href="#" class="footer-link" onclick="window.app.openWalletDrawer(); return false;">My Prize Wallet</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Lucky Draw 168 Portfolio. All Rights Reserved.</span>
+        <span>Colors: Royal Blue • Neon Orange • Mint Green • Pure White</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================= -->
+  <!-- MODAL 1: AUTHENTICATION / CLAIM GATE MODAL              -->
+  <!-- ======================================================= -->
+  <div class="modal-overlay" id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title-text">
+    <div class="modal-dialog-box auth-dialog-box">
+      <button class="modal-close-x modal-close-trigger" aria-label="Close dialog">✕</button>
+      
+      <div class="auth-modal-content">
+        <!-- Pending Prize Reservation Banner (Shown when guest wins a prize) -->
+        <div class="pending-prize-banner" id="auth-pending-prize-banner" style="display: none;">
+          <!-- Dynamically filled with won prize -->
+        </div>
+
+        <div class="auth-header-text">
+          <h2 class="auth-modal-title" id="auth-modal-title-text">Claim Your Prize</h2>
+          <p class="auth-modal-subtitle">Register your account to secure and transfer your prize to your personal wallet.</p>
+        </div>
+
+        <!-- Tab Switches -->
+        <div class="auth-tabs-row">
+          <button class="auth-tab-btn active" id="tab-register-btn">Create New Account</button>
+          <button class="auth-tab-btn" id="tab-login-btn">Sign In</button>
+        </div>
+
+        <!-- Registration Form View -->
+        <div id="register-form-view">
+          <form id="register-form-element">
+            <div class="form-group">
+              <label class="form-label" for="reg-name">Full Legal Name</label>
+              <input type="text" id="reg-name" class="form-input" placeholder="e.g. Serey Vathana" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="reg-identifier">Phone Number or Email</label>
+              <input type="text" id="reg-identifier" class="form-input" placeholder="+855 12 345 678 or name@domain.com" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="reg-password">Create Security Password</label>
+              <input type="password" id="reg-password" class="form-input" placeholder="At least 6 characters" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="reg-delivery">Payout / Showroom Delivery Preference</label>
+              <select id="reg-delivery" class="form-select">
+                <option value="Direct Bank Transfer (ABA / Wing / ACLEDA)">Direct Bank Transfer (ABA / Wing / ACLEDA)</option>
+                <option value="Phnom Penh Central Showroom Pickup">Phnom Penh Central Showroom Pickup</option>
+                <option value="Home VIP Courier Delivery">Home VIP Courier Delivery</option>
+              </select>
+            </div>
+
+            <div class="form-error" id="reg-error-msg"></div>
+
+            <button type="submit" class="form-submit-btn">
+              <span>REGISTER &amp; CLAIM PRIZE 🎟️</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Login Form View -->
+        <div id="login-form-view" style="display: none;">
+          <form id="login-form-element">
+            <div class="form-group">
+              <label class="form-label" for="login-identifier">Phone Number or Email</label>
+              <input type="text" id="login-identifier" class="form-input" placeholder="Registered phone or email" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="login-password">Password</label>
+              <input type="password" id="login-password" class="form-input" placeholder="Enter password" required />
+            </div>
+
+            <div class="form-error" id="login-error-msg"></div>
+
+            <button type="submit" class="form-submit-btn">
+              <span>SIGN IN &amp; CLAIM PRIZE 🔐</span>
+            </button>
+          </form>
+
+          <div class="demo-login-shortcut">
+            <button type="button" class="demo-shortcut-btn" id="demo-quick-login-btn">
+              ⚡ Instant Demo Login (Vannak Chen)
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================= -->
+  <!-- MODAL 2: INTERACTIVE MYSTERY BOX UNBOXING MODAL         -->
+  <!-- ======================================================= -->
+  <div class="modal-overlay" id="mystery-modal" role="dialog" aria-modal="true">
+    <div class="modal-dialog-box mystery-dialog-box">
+      <button class="modal-close-x modal-close-trigger" aria-label="Close dialog">✕</button>
+      <div id="mystery-modal-content">
+        <!-- Rendered dynamically by mystery.js (Glowing Chest -> Shaking -> Vespa/ADV Reveal) -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================= -->
+  <!-- MODAL 3: WINNER CELEBRATION & CERTIFICATE MODAL         -->
+  <!-- ======================================================= -->
+  <div class="modal-overlay" id="claim-success-modal" role="dialog" aria-modal="true">
+    <div class="modal-dialog-box cert-dialog-box">
+      <button class="modal-close-x modal-close-trigger" aria-label="Close dialog">✕</button>
+      <div id="claim-success-details">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+      <div style="padding: 0 1.5rem 1.5rem;">
+        <button class="cert-btn-primary" onclick="window.app.closeClaimSuccessModal(); window.app.openWalletDrawer();">
+          View In My Prize Wallet 💼
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================= -->
+  <!-- MODAL 4: USER PRIZE WALLET SLIDE-OUT DRAWER             -->
+  <!-- ======================================================= -->
+  <div class="drawer-overlay" id="wallet-drawer" role="dialog" aria-modal="true">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <div class="drawer-title-group">
+          <h3>My Prize Wallet</h3>
+          <span class="drawer-user-info" id="wallet-user-name">Guest Player</span>
+        </div>
+        <button class="modal-close-x modal-close-trigger" aria-label="Close drawer">✕</button>
+      </div>
+
+      <div class="drawer-body" id="wallet-claims-list">
+        <!-- Populated dynamically by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Modules in separate files -->
+  <script src="js/prizes.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/mystery.js"></script>
+  <script src="js/wheel.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
